@@ -3,6 +3,7 @@ var WHITE = 1;
 var BLACK = 0;
 var chessBoard;
 var TURN = WHITE;
+var MOVEINPROGRESS = false;
 this.selected = null;
 
 function preload() {
@@ -27,11 +28,9 @@ function draw() {
 
 }
 
-function mouseClicked() {
-    
-    let y = Math.trunc(mouseX/ chessBoard.size);
-    let x = Math.trunc(mouseY / chessBoard.size);
-    console.log(x,y,mouseX/chessBoard.size,mouseY/chessBoard.size)
+function mouseClicked(e) {
+    let y = Math.trunc(e.clientX / chessBoard.size);
+    let x = Math.trunc(e.clientY / chessBoard.size);
     if (!this.selected) {
         if (pieces[x][y] && pieces[x][y].colour === TURN) {
             pieces[x][y].
@@ -51,12 +50,12 @@ function mouseClicked() {
         if (pieces[this.selected.x][this.selected.y].moveTo({ x: x, y: y })) {
             pieces[x][y] = pieces[this.selected.x][this.selected.y]
             pieces[this.selected.x][this.selected.y] = null
-            
-            TURN = (TURN === WHITE) ? BLACK : WHITE;
+            MOVEINPROGRESS = false;
         }
         chessBoard.resetHighlight();
         this.selected = null
-        
+        if (!MOVEINPROGRESS)
+            {TURN = (TURN === WHITE) ? BLACK : WHITE;}
     }
     // chessBoard.clickedOn(mouseX,mouseY);
 }

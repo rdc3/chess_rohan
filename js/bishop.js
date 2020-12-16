@@ -20,14 +20,14 @@ class Bishop {
         this.possiblenNext = [];
         for (var i = 0; i < 8; i++) {
             for (var j = 0; j < 8; j++) {
-                if(i===j ){
+                if(i===j){
                     this.possiblenNext.push({ x: this.pos.x+i, y: this.pos.y+j });
                     this.possiblenNext.push({ x: this.pos.x+i, y: this.pos.y-j });
                     this.possiblenNext.push({ x: this.pos.x-i, y: this.pos.y+j });
                     this.possiblenNext.push({ x: this.pos.x-i, y: this.pos.y-j });
                 }
             }
-        }.
+        }
         this.possiblenNext = this.possiblenNext.filter(p => p.x >= 0 && p.x < 8 &&  p.y >= 0 && p.y < 8)
     }
     possibleNextPositions() {

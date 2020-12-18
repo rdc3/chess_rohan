@@ -30,7 +30,13 @@ class Board {
         size = size / 8
         for (var i = 0; i < 8; i++) {
             for (var j = 0; j < 8; j++) {
-                if (this.highlightPos && this.highlightPos.find((p) => {return p.y===i && p.x===j})) fill(255, 218, 0);
+                var highlight = (this.highlightPos) ? this.highlightPos.find((p) => { return p.y === i && p.x === j }) : null
+                if (highlight) {
+                    fill(255, 218, 0)
+                    if (highlight.attack) {
+                        fill(255, 0, 0)
+                    }
+                }
                 else if ((i + j) % 2 == 0) fill(108, 157, 158);
                 else fill(171, 221, 178);
                 rect(i * size, j * size, size, size)
